@@ -18,7 +18,7 @@ namespace AggregateGDPPopulation
             Dictionary<string, countrygdppop> result = new Dictionary<string, countrygdppop>();
             try
             {
-                StreamReader sr = new StreamReader(@"D:\c#codes\gdp\AggregateGDPPopulation\data\datafile.csv") ;
+                StreamReader sr = new StreamReader("../../../../AggregateGDPPopulation/data/datafile.csv") ;
                 string line = sr.ReadToEnd();
                 sr.Close();
                 string[] array = line.Split('\n');
@@ -27,7 +27,7 @@ namespace AggregateGDPPopulation
                 int countryname= Array.IndexOf(headers, "Country Name");
                 int gdpindex = Array.IndexOf(headers, "GDP Billions (USD) 2012");
                 int popindex = Array.IndexOf(headers, "Population (Millions) 2012");
-                var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@"D:\c#codes\gdp\AggregateGDPPopulation\continent.json"));
+                var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("../../../../AggregateGDPPopulation/continent.json"));
                 foreach (string s in array)
                 {
                     string[] str = s.Replace("\"", "").Split(',');
@@ -48,12 +48,11 @@ namespace AggregateGDPPopulation
                     }
                 }
                 string json = JsonConvert.SerializeObject(result, Formatting.Indented);
-                File.WriteAllText(@"D:\c#codes\gdp\output\output.json", json);
+                File.WriteAllText("../../../../AggregateGDPPopulation/output/output.json", json);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Console.ReadLine();
             }
 
         }
